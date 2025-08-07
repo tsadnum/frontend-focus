@@ -1,0 +1,59 @@
+<mat-card class="dashboard-card habits-card">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">Habits</mat-card-title>
+    <span class="header-spacer"></span>
+    <button mat-icon-button (click)="openCreateHabit()" aria-label="Add habit">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button [routerLink]="'/habits'" aria-label="Open habits page">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    <ng-container *ngIf="habits().length > 0; else emptyState">
+      <div class="habits-list">
+        <div *ngFor="let habit of habits().slice(0, 3); trackBy: trackByHabitId"
+             class="habit-item"
+             [class.completed]="habit.completedToday">
+
+          <mat-checkbox
+            [checked]="habit.completedToday"
+            (change)="toggleHabitCompletion(habit)"
+            class="habit-checkbox"
+            [attr.aria-label]="'Toggle ' + habit.name">
+          </mat-checkbox>
+
+          <div class="habit-content">
+            <div class="habit-title-row">
+              <mat-icon class="habit-icon">{{ habit.icon || 'check_circle' }}</mat-icon>
+              <span class="habit-name" [class.completed-text]="habit.completedToday">
+                {{ habit.name }}
+              </span>
+            </div>
+
+            <span class="habit-streak">
+              {{ habit.currentStreak || 0 }} day streak
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="view-more">
+        <button mat-button color="primary" [routerLink]="'/habits'">
+          View More
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <mat-icon class="empty-icon">self_improvement</mat-icon>
+        <p class="empty-text">No habits yet</p>
+        <button mat-raised-button color="primary" (click)="openCreateHabit()">
+          Create Habit
+        </button>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

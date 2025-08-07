@@ -1,0 +1,13 @@
+.goal-progress-slider {
+  width: 100%;
+  --slider-track-height: 6px;
+}
+
+::ng-deep .goal-progress-slider .mat-slider-track-fill {
+  background-color: #3a3a3c;
+}
+
+::ng-deep .goal-progress-slider .mat-slider-thumb {
+  background-color: #1c1c1e;
+  border: 2px solid white;
+}

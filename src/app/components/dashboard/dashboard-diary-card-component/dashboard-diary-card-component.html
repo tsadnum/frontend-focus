@@ -1,0 +1,51 @@
+<mat-card class="dashboard-card">
+<mat-card-header class="card-header">
+    <mat-card-title class="card-title">Diary</mat-card-title>
+    <span class="header-spacer"></span>
+    <button mat-icon-button (click)="openCreateEntry()" aria-label="Add new diary entry" type="button">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button [routerLink]="'/diary'" aria-label="Open full diary" type="button">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    <ng-container *ngIf="!loading() && topThreeEntries().length > 0; else emptyOrLoading">
+      <ul class="item-list">
+        <li *ngFor="let entry of topThreeEntries()" class="list-item diary-item" (click)="goToEntry(entry.id)">
+          <div class="diary-info">
+            <div class="diary-header">
+              <span class="diary-title">{{ entry.title || '(Untitled)' }}</span>
+              <span class="diary-date">{{ entry.entryDate | date: 'longDate' }}</span>
+            </div>
+
+            <ng-container *ngIf="entry.content as content">
+              <p class="diary-content">
+                {{ content.slice(0, 30) }}
+                <ng-container *ngIf="content.length > 60">...</ng-container>
+              </p>
+            </ng-container>
+          </div>
+        </li>
+      </ul>
+
+      <div class="view-more">
+        <button mat-button color="primary" [routerLink]="'/diary'">View More</button>
+      </div>
+    </ng-container>
+
+
+    <ng-template #emptyOrLoading>
+      <div class="loading-container" *ngIf="loading">
+        <mat-progress-spinner mode="indeterminate" diameter="32"></mat-progress-spinner>
+        <p>Loading diary entries...</p>
+      </div>
+      <div class="empty-state" *ngIf="!loading && diaryEntries.length === 0">
+        <mat-icon class="empty-icon">menu_book</mat-icon>
+        <p class="empty-text">No entries yet</p>
+        <button mat-raised-button color="primary" (click)="openCreateEntry()">New Entry</button>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

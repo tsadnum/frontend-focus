@@ -1,0 +1,95 @@
+<mat-card class="dashboard-card default-color">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">Today Tasks</mat-card-title>
+    <span class="header-spacer"></span>
+    <button mat-icon-button class="create-task-button" (click)="openTaskDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button [routerLink]="'/tasks'" class="nav-button">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    <ng-container *ngIf="tasks() as taskList; else emptyState">
+      <div class="summary-stats" *ngIf="taskList.length > 0 && stats() as s">
+        <div class="stat-item">
+          <span class="stat-value">{{ s.completed }}</span>
+          <span class="stat-label">Completed</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ s.inProgress }}</span>
+          <span class="stat-label">In Progress</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ s.pending }}</span>
+          <span class="stat-label">Pending</span>
+        </div>
+      </div>
+
+      <ul class="item-list" *ngIf="taskList.length > 0">
+        <li *ngFor="let item of taskList.slice(0, 6)" class="list-item task-item">
+          <div class="task-checkbox-container">
+            <mat-checkbox
+              [checked]="item.status === 'COMPLETED'"
+              (change)="onStatusChange(item, $event.checked)"
+              [disabled]="updatingTaskIds().has(item.id)">
+            </mat-checkbox>
+            <mat-spinner
+              diameter="20"
+              *ngIf="updatingTaskIds().has(item.id)"
+              class="task-spinner">
+            </mat-spinner>
+          </div>
+
+          <div class="task-content">
+            <div class="task-main-info">
+              <span class="task-title" [class.completed-task]="item.status === 'COMPLETED'">
+                {{ item.title }}
+              </span>
+              <div class="task-priority-badge" [ngClass]="'priority-' + item.priority.toLowerCase()">
+                <mat-icon class="priority-icon">{{ getPriorityIcon(item.priority) }}</mat-icon>
+                <span class="priority-text">{{ item.priority }}</span>
+              </div>
+            </div>
+
+            <div class="task-meta-info">
+              <div class="task-meta-item" *ngIf="item.dueDate">
+                <mat-icon class="meta-icon">schedule</mat-icon>
+                <span class="meta-text" [class.overdue]="isOverdue(item.dueDate)">
+                  {{ formatTaskDate(item.dueDate) }}
+                </span>
+              </div>
+
+              <div class="task-meta-item" *ngIf="item.type">
+                <mat-icon class="meta-icon">label</mat-icon>
+                <span class="meta-text task-type">{{ item.type }}</span>
+              </div>
+
+              <div class="task-meta-item task-status">
+                <mat-icon class="meta-icon" [ngClass]="'status-' + item.status.toLowerCase()">
+                  {{ getStatusIcon(item.status) }}
+                </mat-icon>
+                <span class="meta-text">{{ getStatusText(item.status) }}</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="view-more-container" *ngIf="taskList.length > 0">
+        <button mat-button [routerLink]="'/tasks'">View More</button>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <mat-icon class="empty-icon">assignment_turned_in</mat-icon>
+        <p class="empty-text">You have no tasks for today.</p>
+        <button mat-raised-button color="primary" (click)="openTaskDialog()">
+          Create a new task
+        </button>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

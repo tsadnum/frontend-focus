@@ -1,0 +1,92 @@
+<div class="page-header">
+  <div class="header-left">
+    <button mat-icon-button [routerLink]="'/dashboard'" aria-label="Back to dashboard" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="page-title-section">
+      <h1 class="page-title">Task Board</h1>
+      <p class="page-subtitle">
+        {{ getTotalTasksCount() }} {{ getTotalTasksCount() === 1 ? 'task' : 'tasks' }} across all stages
+      </p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button mat-raised-button (click)="openCreateTaskDialog()" class="header-add-button">
+      <mat-icon>add</mat-icon>
+      New Task
+    </button>
+  </div>
+</div>
+
+<div class="kanban-board" cdkDropListGroup>
+  <div class="kanban-column" *ngFor="let status of statuses">
+    <!-- COLUMN HEADER -->
+    <div class="column-header">
+      <div class="column-title-section">
+        <h3 class="column-title">{{ getTaskLabel(status) }}</h3>
+        <span class="task-count">{{ tasksByStatus[status].length || 0 }}</span>
+      </div>
+      <div class="column-indicator" [ngClass]="getStatusClass(status)"></div>
+    </div>
+
+    <div
+      class="task-list"
+      cdkDropList
+      [cdkDropListData]="tasksByStatus[status]"
+      [cdkDropListConnectedTo]="getConnectedIds(status)"
+      (cdkDropListDropped)="drop($event, status)"
+      [id]="sanitizeId(status)"
+    >
+      <div
+        class="task-card-wrapper"
+        *ngFor="let task of tasksByStatus[status]; trackBy: trackByTaskId"
+        cdkDrag
+      >
+        <div class="task-card dashboard-card">
+          <div class="card-header">
+            <div class="task-priority">
+              <div
+                class="priority-dot"
+                [ngClass]="getPriorityClass(task.priority)"
+                [matTooltip]="task.priority.toLowerCase() + ' priority'"
+              ></div>
+            </div>
+            <h4 class="card-title">{{ task.title }}</h4>
+            <div class="header-spacer"></div>
+            <div class="task-actions">
+              <button mat-icon-button (click)="openEditTaskDialog(task)" matTooltip="Edit task">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteTask(task)" matTooltip="Delete task">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-content" *ngIf="task.description">
+            <p class="task-description">{{ task.description }}</p>
+          </div>
+
+          <div class="card-footer" *ngIf="task.dueDate">
+            <div class="task-meta">
+              <mat-icon class="meta-icon">schedule</mat-icon>
+              <span class="due-date">{{ task.dueDate | date:'MMM d' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="drag-preview dashboard-card" *cdkDragPreview>
+          <div class="preview-content">
+            <div class="priority-dot" [ngClass]="getPriorityClass(task.priority)"></div>
+            <span class="preview-title">{{ task.title }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="column-empty-state" *ngIf="tasksByStatus[status]?.length === 0">
+        <mat-icon class="empty-icon">{{ getColumnEmptyIcon(status) }}</mat-icon>
+        <p class="empty-text">{{ getColumnEmptyMessage(status) }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,304 @@
+.sidenav-content {
+  background:
+    url('/assets/background-pattern.svg') no-repeat center center / cover,
+    linear-gradient(135deg, #eceff4, #f9f9fb);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-y: auto;
+  z-index: 900;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  margin-top: 75px;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.custom-toolbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 98%;
+  height: 64px;
+  border-radius: 25px;
+  padding: 0 24px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  border: 1px solid rgb(230, 230, 230);
+}
+
+.app-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1c1c1e;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* Botón de notificaciones */
+.notification-button {
+  color: #2c2c2e !important;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 15px;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+  margin-right: 8px;
+  min-width: 48px;
+}
+
+.notification-button:hover {
+  background-color: rgba(44, 44, 46, 0.1);
+}
+
+.notification-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff3b30;
+  color: white;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.logout-button {
+  color: white !important;
+  background-color: #2c2c2e;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 15px;
+  padding: 6px 18px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logout-button:hover {
+  background-color: #3a3a3c;
+}
+
+/* Estilos del menú de notificaciones */
+::ng-deep .notification-menu {
+  margin-top: 8px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+::ng-deep .notification-menu .mat-mdc-menu-panel {
+  min-width: 380px;
+  max-width: 400px;
+  max-height: 500px;
+  padding: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+.clear-all-btn {
+  color: #007aff !important;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  min-width: auto;
+  line-height: 1.2;
+}
+
+.clear-all-btn:hover {
+  background-color: rgba(0, 122, 255, 0.1);
+}
+
+.notification-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+}
+
+.notification-item:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.notification-item.unread {
+  background-color: rgba(0, 122, 255, 0.05);
+}
+
+.notification-item.unread::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #007aff;
+}
+
+.notification-icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 40px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.notification-icon mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #666;
+}
+
+.notification-item[data-type="TASK_DUE_SOON"].unread::before {
+  background-color: #ff9500;
+}
+
+.notification-item[data-type="TASK_DUE"].unread::before {
+  background-color: #ff3b30;
+}
+
+.notification-item[data-type="HABIT_MISSED"].unread::before {
+  background-color: #ff6b6b;
+}
+
+.notification-item[data-type="GOAL_NEAR_DEADLINE"].unread::before {
+  background-color: #ffa726;
+}
+
+.notification-item[data-type="FOCUS_REMINDER"].unread::before {
+  background-color: #5c6bc0;
+}
+
+.notification-item[data-type="UPCOMING_EVENT"].unread::before,
+.notification-item[data-type="EVENT_UPCOMING"].unread::before {
+  background-color: #42a5f5;
+}
+
+.notification-item[data-type="PHYSICAL_ACTIVITY_MISSED"].unread::before {
+  background-color: #ef5350;
+}
+
+.notification-content {
+  flex: 1;
+  margin-left: 0;
+}
+
+.notification-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1c1e;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.notification-message {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notification-time {
+  font-size: 11px;
+  color: #999;
+  font-weight: 400;
+}
+
+.delete-notification {
+  width: 32px;
+  height: 32px;
+  color: #999;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.delete-notification:hover {
+  color: #ff3b30;
+  background-color: rgba(255, 59, 48, 0.1);
+}
+
+.delete-notification mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.no-notifications {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #999;
+}
+
+.no-notifications mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+  color: #ccc;
+}
+
+.no-notifications p {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}

@@ -1,0 +1,162 @@
+.card-content{
+  justify-content: center;
+}
+
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.mode-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.session-number {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.4);
+  margin: 0;
+}
+
+.time-display {
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: #393939;
+  line-height: 1;
+  text-align: center;
+  margin: 8px 0;
+}
+
+.separator {
+  margin: 0 2px;
+  opacity: 0.5;
+}
+
+.mode-switch {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mode-switch button {
+  font-weight: 500;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  min-width: auto;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.6);
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.mode-switch button:hover:not(:disabled) {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.mode-switch button.active {
+  background: rgba(255, 255, 255, 0.8);
+  color: #1c1c1e;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.mode-switch button:disabled {
+  opacity: 0.5;
+}
+
+.timer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px 20px;
+  background: transparent;
+}
+
+.timer-actions button {
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 6px 16px;
+  text-transform: none;
+  font-size: 13px;
+  min-width: auto;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.primary-action {
+  background: #2c2c2e !important;
+  color: white !important;
+}
+
+.primary-action:hover {
+  background: #2c2c2e !important;
+  transform: translateY(-1px);
+}
+
+.secondary-action {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #1c1c1e !important;
+}
+
+.secondary-action:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+  transform: translateY(-1px);
+}
+
+.skip-action {
+  background: transparent !important;
+  color: #2c2c2e !important;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+.skip-action:hover {
+  background: rgba(71, 71, 71, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .time-display {
+    font-size: 2.8rem;
+  }
+
+  .card-header,
+  .card-content,
+  .timer-actions {
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: center;
+  }
+
+  .mode-switch {
+    gap: 6px;
+  }
+
+  .mode-switch button {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .timer-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timer-actions button {
+    min-width: 70px;
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}

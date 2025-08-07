@@ -1,0 +1,40 @@
+<div class="calendar-wrapper">
+  <div class="calendar-header">
+    <div class="header-left">
+      <button mat-icon-button [routerLink]="'/dashboard'" aria-label="Back to dashboard" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="page-title-section">
+        <h1 class="page-title">My Calendar</h1>
+        <p class="page-subtitle">
+          {{ events.length }} {{ events.length === 1 ? 'event' : 'events' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button mat-icon-button (click)="goToToday()" matTooltip="Go to today">
+        <mat-icon>today</mat-icon>
+      </button>
+
+      <button mat-icon-button [disabled]="loading" (click)="refreshEvents()" matTooltip="Refresh">
+        <mat-icon [class.spinning]="loading">refresh</mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="createEventToday()" matTooltip="New Event">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="full-calendar-container" [class.loading]="loading">
+    <div class="loading-overlay" *ngIf="loading">
+      <div class="loading-spinner">
+        <mat-progress-spinner diameter="50"></mat-progress-spinner>
+        <p>Loading events...</p>
+      </div>
+    </div>
+
+    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+  </div>
+</div>

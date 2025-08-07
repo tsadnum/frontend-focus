@@ -1,0 +1,156 @@
+<div class="task-form-panel">
+  <div class="task-form-card dashboard-card">
+    <div class="card-header">
+      <mat-icon class="form-icon">{{ data.id ? 'edit' : 'add_task' }}</mat-icon>
+      <h3 class="card-title">{{ data.id ? 'Edit Task' : 'New Task' }}</h3>
+      <div class="header-spacer"></div>
+      <button mat-icon-button (click)="cancel()" matTooltip="Close" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="card-content">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="task-form">
+
+        <div class="form-section">
+          <h4 class="section-title">Basic Information</h4>
+
+          <div class="form-field-group">
+            <label class="field-label">Title *</label>
+            <mat-form-field appearance="outline" class="custom-form-field">
+              <input
+                matInput
+                formControlName="title"
+                placeholder="Enter task title..."
+                maxlength="100"
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="form-field-group">
+            <label class="field-label">Description</label>
+            <mat-form-field appearance="outline" class="custom-form-field">
+              <textarea
+                matInput
+                formControlName="description"
+                rows="4"
+                placeholder="Describe the task details..."
+                maxlength="500"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h4 class="section-title">Task Properties</h4>
+
+          <div class="form-row">
+            <div class="form-field-group">
+              <label class="field-label">Type *</label>
+              <mat-form-field appearance="outline" class="custom-form-field">
+                <mat-select formControlName="type" placeholder="Select type">
+                  <mat-option *ngFor="let t of types" [value]="t">
+                    <div class="option-content">
+                      <mat-icon class="option-icon">{{ getTypeIcon(t) }}</mat-icon>
+                      <span>{{ t | enumLabel }}</span>
+                    </div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-group">
+              <label class="field-label">Status *</label>
+              <mat-form-field appearance="outline" class="custom-form-field">
+                <mat-select formControlName="status" placeholder="Select status">
+                  <mat-option *ngFor="let s of statuses" [value]="s">
+                    <div class="option-content">
+                      <div class="status-dot" [ngClass]="getStatusClass(s)"></div>
+                      <span>{{ s | enumLabel }}</span>
+                    </div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-group">
+              <label class="field-label">Priority *</label>
+              <mat-form-field appearance="outline" class="custom-form-field">
+                <mat-select formControlName="priority" placeholder="Select priority">
+                  <mat-option *ngFor="let p of priorities" [value]="p">
+                    <div class="option-content">
+                      <div class="priority-dot" [ngClass]="getPriorityClass(p)"></div>
+                      <span>{{ p | enumLabel }}</span>
+                    </div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h4 class="section-title">Timeline</h4>
+
+          <div class="form-row">
+            <div class="form-field-group">
+              <label class="field-label">Start Date</label>
+              <mat-form-field appearance="outline" class="custom-form-field">
+                <input
+                  matInput
+                  [matDatepicker]="startPicker"
+                  formControlName="startDate"
+                  placeholder="Choose start date"
+                  readonly
+                />
+                <mat-datepicker-toggle matSuffix [for]="startPicker">
+                  <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #startPicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="form-field-group">
+              <label class="field-label">Due Date</label>
+              <mat-form-field appearance="outline" class="custom-form-field">
+                <input
+                  matInput
+                  [matDatepicker]="duePicker"
+                  formControlName="dueDate"
+                  placeholder="Choose due date"
+                  readonly
+                />
+                <mat-datepicker-toggle matSuffix [for]="duePicker">
+                  <mat-icon matDatepickerToggleIcon>event</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #duePicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-hint" *ngIf="form.get('startDate')?.value && form.get('dueDate')?.value">
+            <mat-icon class="hint-icon">info</mat-icon>
+            <span>Duration: {{ getTaskDuration() }}</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button mat-button type="button" (click)="cancel()" class="cancel-button">
+            Cancel
+          </button>
+          <button
+            mat-raised-button
+            type="submit"
+            [disabled]="form.invalid || isSubmitting"
+            class="submit-button"
+          >
+            <mat-icon *ngIf="isSubmitting" class="spinning">hourglass_empty</mat-icon>
+            <mat-icon *ngIf="!isSubmitting && data?.id">save</mat-icon>
+            <mat-icon *ngIf="!isSubmitting && !data?.id">add_task</mat-icon>
+            {{ isSubmitting ? 'Saving...' : (data.id ? 'Update Task' : 'Create Task') }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

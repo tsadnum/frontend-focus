@@ -1,0 +1,140 @@
+.calendar-wrapper {
+  display: block;
+  padding: 1.5rem 2rem 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .page-title-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1c1c1e;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 8px;
+
+    button {
+      background: #2c2c2e;
+      color: white;
+      border-radius: 12px;
+      width: 44px;
+      height: 44px;
+      transition: all 0.3s ease;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+
+      &:hover {
+        background: #3a3a3c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      mat-icon {
+        font-size: 20px;
+      }
+
+      &.spinning {
+        animation: spin 1s linear infinite;
+      }
+    }
+  }
+
+  .back-button {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgb(230, 230, 230);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    mat-icon {
+      color: #1c1c1e;
+    }
+  }
+
+  .full-calendar-container {
+    position: relative;
+
+    &.loading {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+  }
+
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(3px);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loading-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+
+      p {
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.6);
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,63 @@
+<mat-card class="dashboard-card {{ card.colorClass }}">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">{{ card.title }}</mat-card-title>
+    <span class="header-spacer"></span>
+
+    <button mat-icon-button (click)="openAddGoalDialog()" aria-label="Add goal">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <button mat-icon-button [routerLink]="card.route" aria-label="Open goals page">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    <div class="summary-stats" *ngIf="stats().total > 0">
+      <div class="stat-item">
+        <span class="stat-value">{{ stats().total }}</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ stats().completed }}</span>
+        <span class="stat-label">Completed</span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="goals().length > 0; else emptyState">
+      <ul class="item-list">
+        <li *ngFor="let goal of goals().slice(0, 2)" class="list-item goal-item">
+          <div class="goal-content">
+            <span class="goal-title">{{ goal.title }}</span>
+            <mat-slider
+              class="goal-progress-slider w-full"
+              [min]="0"
+              [max]="100"
+              [step]="5"
+            >
+              <input
+                matSliderThumb
+                [value]="goal.progress"
+                (input)="handleSliderInput($event, goal)"
+              />
+            </mat-slider>
+          </div>
+        </li>
+      </ul>
+
+      <div class="view-more">
+        <button mat-button color="primary" [routerLink]="card.route">View More</button>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <mat-icon class="empty-icon">{{ card.emptyStateIcon }}</mat-icon>
+        <p class="empty-text">{{ card.emptyStateMessage }}</p>
+        <button mat-raised-button color="primary" [routerLink]="card.route">
+          {{ card.emptyStateAction }}
+        </button>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

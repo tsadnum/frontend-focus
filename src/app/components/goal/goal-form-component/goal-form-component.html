@@ -1,0 +1,76 @@
+<!-- FORM PANEL -->
+<div class="goal-form-panel">
+  <div class="goal-form-card dashboard-card">
+    <!-- CARD HEADER -->
+    <div class="card-header">
+      <mat-icon class="form-icon">{{ data?.id ? 'edit' : 'add' }}</mat-icon>
+      <h3 class="card-title">{{ data?.id ? 'Edit Goal' : 'New Goal' }}</h3>
+      <div class="header-spacer"></div>
+      <button mat-icon-button (click)="onCancel()" matTooltip="Close" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="card-content">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="goal-form">
+        <div class="form-field-group">
+          <label class="field-label">Title</label>
+          <mat-form-field appearance="outline" class="custom-form-field">
+            <input matInput formControlName="title" placeholder="Enter a title for your goal..." />
+          </mat-form-field>
+        </div>
+
+        <div class="form-field-group">
+          <label class="field-label">Description</label>
+          <mat-form-field appearance="outline" class="custom-form-field">
+            <textarea
+              matInput
+              formControlName="description"
+              rows="4"
+              placeholder="Describe your goal (optional)..."
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field-group" style="display: flex; gap: 1rem;">
+          <div style="flex: 1;">
+            <label class="field-label">Target Date</label>
+            <mat-form-field appearance="outline" class="custom-form-field">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="targetDate"
+                placeholder="Choose a date"
+              />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div style="flex: 1;" class="goal-slider">
+            <label class="field-label">Progress (%)</label>
+            <mat-slider min="0" max="100" step="10" class="w-full">
+              <input matSliderThumb formControlName="progress" />
+            </mat-slider>
+          </div>
+        </div>
+
+        <div class="goal-form-actions">
+          <button mat-button type="button" (click)="onCancel()" class="cancel-button">
+            Cancel
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="submit-button"
+            [disabled]="form.invalid"
+          >
+            <mat-icon>{{ data?.id ? 'save' : 'add' }}</mat-icon>
+            {{ data?.id ? 'Update Goal' : 'Create Goal' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

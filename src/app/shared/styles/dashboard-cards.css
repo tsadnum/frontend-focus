@@ -1,0 +1,156 @@
+/* === GLOBAL DASHBOARD CARD STYLES === */
+
+/* CARD WRAPPER */
+.dashboard-card {
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgb(230, 230, 230);
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* HEADER */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1c1c1e;
+  margin: 0;
+}
+
+.header-spacer {
+  flex: 1;
+}
+
+/* CONTENT */
+.card-content {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+/* LISTS */
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.list-item {
+  background: rgba(255, 255, 255, 0.65);
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.list-item:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* VIEW MORE BUTTON */
+.view-more,
+.view-more-container {
+  text-align: center;
+  margin-top: auto;
+}
+
+.view-more button,
+.view-more-container button {
+  font-weight: 500;
+  border-radius: 12px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  padding: 40px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.empty-text {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.empty-state button {
+  background-color: #2c2c2e;
+  color: white;
+  border-radius: 15px;
+  padding: 6px 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.empty-state button:hover {
+  background-color: #3a3a3c;
+  transform: translateY(-2px);
+}
+
+/* LOADING STATE */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 20px;
+}
+
+.loading-container p {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.summary-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  min-width: 80px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1c1c1e;
+  display: block;
+}
+
+.stat-label {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+}

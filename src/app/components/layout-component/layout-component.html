@@ -1,0 +1,65 @@
+<div class="sidenav-content">
+  <mat-toolbar class="custom-toolbar">
+    <span class="app-title">Focus</span>
+    <span class="spacer"></span>
+
+    <button mat-button class="notification-button"
+            [matMenuTriggerFor]="notificationMenu"
+            (click)="markAllAsRead()">
+      <div class="notification-icon-container">
+        <mat-icon>notifications</mat-icon>
+        <span class="notification-badge" *ngIf="unreadCount() > 0">
+          {{ unreadCount() > 99 ? '99+' : unreadCount() }}
+        </span>
+      </div>
+    </button>
+
+    <mat-menu #notificationMenu="matMenu" class="notification-menu">
+      <div class="notification-header">
+        <h3>Notificaciones</h3>
+        <button mat-button class="clear-all-btn"
+                (click)="clearAllNotifications()"
+                *ngIf="notifications().length > 0">
+          Limpiar todo
+        </button>
+      </div>
+
+      <div class="notification-list" *ngIf="notifications().length > 0; else noNotifications">
+        <div class="notification-item"
+             *ngFor="let notification of notifications(); trackBy: trackByNotificationId"
+             [class.unread]="!notification.isRead"
+             [attr.data-type]="notification.type"
+             (click)="markAsRead(notification.id)">
+          <div class="notification-icon">
+            <mat-icon>{{ getNotificationIcon(notification.type) }}</mat-icon>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">{{ notification.title }}</div>
+            <div class="notification-message">{{ notification.message }}</div>
+            <div class="notification-time">{{ formatTime(notification.sentAt) }}</div>
+          </div>
+          <button mat-icon-button class="delete-notification"
+                  (click)="deleteNotification(notification.id); $event.stopPropagation()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <ng-template #noNotifications>
+        <div class="no-notifications">
+          <mat-icon>notifications_none</mat-icon>
+          <p>No tienes notificaciones</p>
+        </div>
+      </ng-template>
+    </mat-menu>
+
+    <button mat-button class="logout-button" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-toolbar>
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

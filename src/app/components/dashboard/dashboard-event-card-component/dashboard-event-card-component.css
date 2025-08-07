@@ -1,0 +1,134 @@
+.list-item.event-item {
+  background: rgba(255, 255, 255, 0.65);
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  transition: background 0.2s ease;
+}
+
+.list-item.event-item:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.event-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+}
+
+.event-icon {
+  font-size: 28px;
+  color: #3f51b5;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #1c1c1e;
+}
+
+.event-title {
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+.event-description {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.event-time {
+  display: flex;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.event-hour {
+  font-weight: 500;
+}
+
+.event-label {
+  font-weight: 600;
+  margin-right: 2px;
+}
+
+.label-today {
+  color: #1976d2;
+}
+
+.label-tomorrow {
+  color: #0288d1;
+}
+
+.label-past {
+  color: #d32f2f;
+}
+
+.label-soon {
+  color: #f9a825;
+}
+
+.label-upcoming {
+  color: #388e3c;
+}
+
+.delete-event-button {
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.view-more {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.view-more button {
+  font-weight: 500;
+  border-radius: 12px;
+}
+
+.empty-state {
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
+}
+
+.empty-text {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.empty-state button {
+  background-color: #2c2c2e;
+  color: white;
+  border-radius: 15px;
+  padding: 6px 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.empty-state button:hover {
+  background-color: #3a3a3c;
+  transform: translateY(-2px);
+}

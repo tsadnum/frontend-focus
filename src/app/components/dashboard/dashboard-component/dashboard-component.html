@@ -1,0 +1,7 @@
+<mat-grid-list [cols]="cols()" class="dashboard-grid" rowHeight="460px" gutterSize="20px">
+  <mat-grid-tile *ngFor="let tile of tiles()" [colspan]="tile.cols" [rowspan]="tile.rows">
+    <div class="tile-content">
+      <ng-container *ngComponentOutlet="getComponent(tile.type)"></ng-container>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

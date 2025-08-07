@@ -1,0 +1,83 @@
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="header-left">
+    <button mat-icon-button [routerLink]="'/dashboard'" aria-label="Back to dashboard" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="page-title-section">
+      <h1 class="page-title">My Diary</h1>
+      <p class="page-subtitle" *ngIf="groupedEntries.length > 0">
+        {{ getTotalEntriesCount() }} {{ getTotalEntriesCount() === 1 ? 'entry' : 'entries' }}
+      </p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button mat-icon-button (click)="onEdit(null)" matTooltip="New Entry" class="header-add-button">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="entries-container">
+  <!-- LOADING STATE -->
+  <div *ngIf="loading" class="loading-container">
+    <mat-progress-spinner diameter="50"></mat-progress-spinner>
+    <p>Loading your entries...</p>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div *ngIf="!loading && groupedEntries.length === 0" class="empty-state">
+    <mat-icon class="empty-icon">auto_stories</mat-icon>
+    <p class="empty-text">There are no entries yet. Write your first thought!</p>
+    <button mat-raised-button (click)="onEdit(null)">
+      <mat-icon>add</mat-icon>
+      Create First Entry
+    </button>
+  </div>
+
+  <!-- ENTRIES GROUPS -->
+  <div *ngFor="let group of groupedEntries" class="entries-group" [style.display]="loading ? 'none' : 'block'">
+    <h2 class="group-header">{{ group.label }}</h2>
+
+    <div class="entries-grid">
+      <div *ngFor="let entry of group.entries" class="entry-card dashboard-card">
+        <!-- CARD HEADER -->
+        <div class="card-header">
+          <div class="entry-info">
+            <h3 class="card-title">{{ entry.title }}</h3>
+            <span class="entry-date">{{ entry.entryDate | date }}</span>
+          </div>
+          <div class="header-spacer"></div>
+          <div class="entry-actions">
+            <button mat-icon-button color="primary" (click)="onEdit(entry)" matTooltip="Edit entry">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDelete(entry)" matTooltip="Delete entry">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD CONTENT -->
+        <div class="card-content">
+          <p class="entry-text">
+            {{ entry.content | slice: 0:250 }}
+            <span *ngIf="entry.content.length > 250">...</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING ACTION BUTTON -->
+<button
+  mat-fab
+  color="primary"
+  class="fab-button"
+  (click)="onEdit(null)"
+  matTooltip="New Entry"
+>
+  <mat-icon>add</mat-icon>
+</button>

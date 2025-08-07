@@ -1,0 +1,77 @@
+<div class="page-header">
+  <div class="header-left">
+    <button mat-icon-button [routerLink]="'/dashboard'" aria-label="Back to dashboard" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="page-title-section">
+      <h1 class="page-title">My Habits</h1>
+      <p class="page-subtitle" *ngIf="habits.length > 0">
+        {{ habits.length }} {{ habits.length === 1 ? 'habit' : 'habits' }}
+      </p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button mat-icon-button (click)="openForm()" matTooltip="New Habit" class="header-add-button">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="entries-container">
+  <div *ngIf="loading" class="loading-container">
+    <mat-progress-spinner diameter="50"></mat-progress-spinner>
+    <p>Loading your habits...</p>
+  </div>
+
+  <div *ngIf="!loading && habits.length === 0" class="empty-state">
+    <mat-icon class="empty-icon">self_improvement</mat-icon>
+    <p class="empty-text">You haven't added any habits yet. Create your first one!</p>
+    <button mat-raised-button color="primary" (click)="openForm()">
+      <mat-icon>add</mat-icon>
+      Create First Habit
+    </button>
+  </div>
+
+  <div class="entries-grid" *ngIf="!loading && habits.length > 0">
+    <div *ngFor="let habit of habits" class="entry-card dashboard-card">
+      <!-- CARD HEADER -->
+      <div class="card-header">
+        <div class="entry-info">
+          <h3 class="card-title">
+            <mat-icon class="habit-icon">check_circle</mat-icon>
+            {{ habit.name }}
+          </h3>
+          <span class="entry-date">Days: {{ habit.activeDays.join(', ') }}</span>
+        </div>
+        <div class="header-spacer"></div>
+        <div class="entry-actions">
+          <button mat-icon-button color="primary" (click)="openForm(habit)" matTooltip="Edit habit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteHabit(habit.id)" matTooltip="Delete habit">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-content">
+        <p class="entry-text" *ngIf="habit.description">{{ habit.description }}</p>
+        <p class="entry-text"><strong>Reminders:</strong> {{ habit.reminderTimes.join(', ') }}</p>
+        <mat-slide-toggle [(ngModel)]="habit.active" (change)="toggleActive(habit, $event)">
+          Active
+        </mat-slide-toggle>
+        <button mat-flat-button color="accent" (click)="markCompleted(habit)">Mark Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
+  mat-fab
+  color="primary"
+  class="fab-button"
+  (click)="openForm()"
+  matTooltip="New Habit"
+>
+  <mat-icon>add</mat-icon>
+</button>

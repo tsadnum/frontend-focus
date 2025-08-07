@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{ data ? 'Edit Habit' : 'New Habit' }}</h2>
+
+<mat-dialog-content [formGroup]="form" class="form">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" required />
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput rows="3" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Active Days</mat-label>
+    <mat-select formControlName="activeDays" multiple>
+      <mat-option *ngFor="let day of days" [value]="day">{{ day }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="form-field-group">
+    <label class="field-label">Reminder Times</label>
+
+    <div class="reminder-time-input">
+      <input type="time" [(ngModel)]="newReminderTime" class="time-picker" />
+      <button mat-icon-button color="primary" (click)="addReminderTime()" [disabled]="!newReminderTime">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <mat-chip-listbox>
+      <mat-chip *ngFor="let time of reminderTimes; let i = index" (removed)="removeReminderTime(i)">
+        {{ time }}
+        <button mat-icon-button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+    </mat-chip-listbox>
+  </div>
+
+  <mat-slide-toggle formControlName="isActive">Active</mat-slide-toggle>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">
+    Save
+  </button>
+</mat-dialog-actions>

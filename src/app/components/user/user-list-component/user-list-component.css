@@ -1,0 +1,131 @@
+mat-card.p-4 {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+}
+
+mat-card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+mat-form-field {
+  min-width: 200px;
+  flex: 1;
+  height: 56px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-color: #d1d5db;
+}
+
+.mat-form-field-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+mat-card button[mat-raised-button] {
+  height: 56px;
+  font-weight: 600;
+  padding: 0 1.5rem;
+  text-transform: none;
+  background-color: #6b46c1;
+  color: #ffffff;
+  border-radius: 2rem;
+}
+
+mat-card button[mat-raised-button]:hover {
+  background-color: #4f2e9c;
+  color: #ffffff;
+}
+
+table.mat-table {
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.mat-header-row {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.mat-row {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.mat-row:hover {
+  background-color: #f3f4f6;
+}
+
+.mat-cell, .mat-header-cell {
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #374151;
+  word-break: break-word;
+}
+
+button[mat-button] {
+  font-size: 0.85rem;
+  color: #ffffff;
+  background-color: #6b46c1;
+  font-weight: 500;
+  padding: 0.25rem 1rem;
+  border-radius: 2rem;
+  text-transform: none;
+}
+
+button[mat-button]:hover {
+  background-color: #4f2e9c;
+}
+
+.mat-paginator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+.mat-paginator-page-size-select,
+.mat-paginator-range-label {
+  margin: 0 8px;
+}
+
+.mat-paginator-navigation-previous,
+.mat-paginator-navigation-next,
+.mat-paginator-navigation-first,
+.mat-paginator-navigation-last {
+  color: #4b5563;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+.mat-paginator-navigation-previous:hover,
+.mat-paginator-navigation-next:hover,
+.mat-paginator-navigation-first:hover,
+.mat-paginator-navigation-last:hover {
+  background-color: #f3f4f6;
+}
+
+.mat-paginator-icon {
+  width: 20px;
+  height: 20px;
+  fill: #6b7280;
+}

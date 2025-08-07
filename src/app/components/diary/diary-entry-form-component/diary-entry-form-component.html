@@ -1,0 +1,58 @@
+<!-- FORM PANEL -->
+<div class="entry-form-panel">
+  <div class="entry-form-card dashboard-card">
+    <!-- CARD HEADER -->
+    <div class="card-header">
+      <mat-icon class="form-icon">{{ data?.id ? 'edit' : 'add' }}</mat-icon>
+      <h3 class="card-title">{{ data?.id ? 'Edit Entry' : 'New Entry' }}</h3>
+      <div class="header-spacer"></div>
+      <button mat-icon-button (click)="cancel()" matTooltip="Close" class="close-button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- CARD CONTENT -->
+    <div class="card-content">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="entry-form">
+        <!-- TITLE FIELD -->
+        <div class="form-field-group">
+          <label class="field-label">Title</label>
+          <mat-form-field appearance="outline" class="custom-form-field">
+            <input matInput formControlName="title" placeholder="Enter a meaningful title..." />
+          </mat-form-field>
+        </div>
+
+        <!-- CONTENT FIELD -->
+        <div class="form-field-group">
+          <label class="field-label">Content</label>
+          <mat-form-field appearance="outline" class="custom-form-field">
+            <textarea
+              matInput
+              formControlName="content"
+              rows="8"
+              placeholder="What's on your mind? Share your thoughts..."
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <!-- FORM ACTIONS -->
+        <div class="form-actions">
+          <button mat-button type="button" (click)="cancel()" class="cancel-button">
+            Cancel
+          </button>
+          <button
+            mat-raised-button
+            type="submit"
+            [disabled]="form.invalid || isSubmitting"
+            class="submit-button"
+          >
+            <mat-icon *ngIf="isSubmitting">hourglass_empty</mat-icon>
+            <mat-icon *ngIf="!isSubmitting && data?.id">save</mat-icon>
+            <mat-icon *ngIf="!isSubmitting && !data?.id">add</mat-icon>
+            {{ isSubmitting ? 'Saving...' : (data?.id ? 'Update Entry' : 'Create Entry') }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

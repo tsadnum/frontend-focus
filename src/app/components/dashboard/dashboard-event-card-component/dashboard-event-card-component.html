@@ -1,0 +1,50 @@
+<mat-card class="dashboard-card {{ card.colorClass }}">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">{{ card.title }}</mat-card-title>
+    <span class="header-spacer"></span>
+
+    <button mat-icon-button aria-label="Create Event" (click)="openCreateEventDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <button mat-icon-button [routerLink]="card.route" aria-label="Go to Events Page">
+      <mat-icon>open_in_new</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    <ng-container *ngIf="events().length > 0; else emptyState">
+      <ul class="item-list">
+        <li *ngFor="let event of events().slice(0, 3)" class="list-item event-item">
+          <div class="event-content">
+            <mat-icon class="event-icon">event</mat-icon>
+            <div class="event-info">
+              <span class="event-title">{{ event.title }}</span>
+              <span class="event-description" *ngIf="event.description">{{ event.description }}</span>
+              <div class="event-time">
+                <span class="event-label" [ngClass]="getLabelClass(event.startDateTime)">
+                  {{ getDateLabel(event.startDateTime) }}
+                </span>
+                <span class="event-hour">{{ event.startDateTime | date: 'shortTime' }}</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="view-more">
+        <button mat-button color="primary" [routerLink]="card.route">View More</button>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <mat-icon class="empty-icon">{{ card.emptyStateIcon }}</mat-icon>
+        <p class="empty-text">{{ card.emptyStateMessage }}</p>
+        <button mat-raised-button color="primary" (click)="openCreateEventDialog()">
+          {{ card.emptyStateAction }}
+        </button>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

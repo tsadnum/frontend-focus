@@ -1,0 +1,42 @@
+<div class="register-wrapper">
+  <div class="register-form-panel">
+    <div class="form-container">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+        <h2 class="register-title">Register</h2>
+
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="firstName" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="register-input">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" required />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+          Sign Up
+        </button>
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+
+        <div class="login-link">
+          Already have an account?
+          <a routerLink="/auth/login">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
