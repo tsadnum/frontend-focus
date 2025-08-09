@@ -1,6 +1,13 @@
 <div class="login-wrapper">
   <div class="login-form-panel">
     <div class="form-container">
+
+      <div class="demo-credentials">
+        <p><strong>Demo credentials:</strong></p>
+        <p>Email: <code>test@foucs.com</code></p>
+        <p>Password: <code>123456</code></p>
+      </div>
+
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" novalidate>
         <h2 class="login-title">Login</h2>
 

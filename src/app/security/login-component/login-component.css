@@ -106,3 +106,21 @@ button[type="submit"]:disabled {
   color: #ffffff;
 }
 
+.demo-credentials {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #2c2c2e;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  code {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+}
